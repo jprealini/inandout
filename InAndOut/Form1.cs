@@ -139,7 +139,8 @@ namespace InAndOut
 
         void tmr_Tick(object sender, EventArgs e)
         {
-            currentTime.Text = DateTime.Now.ToString();
+            DateTimeFormatInfo fmt = (new CultureInfo("es-ES")).DateTimeFormat;
+            currentTime.Text = DateTime.Now.ToString("g", fmt);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -172,18 +173,6 @@ namespace InAndOut
         private void generarReporteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Report form = new Report();
-            form.ShowDialog();
-        }
-
-        private void armarInfoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PrepareReport form = new PrepareReport();
-            form.ShowDialog();
-        }
-
-        private void verReportesMensualesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MonthlyReports form = new MonthlyReports();
             form.ShowDialog();
         }
 

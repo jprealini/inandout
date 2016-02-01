@@ -2,7 +2,6 @@ C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\bin
 C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\bin\Debug\InAndOut.exe
 C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\bin\Debug\InAndOut.pdb
 C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\obj\Debug\InAndOut.Form1.resources
-C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\obj\Debug\InAndOut.PrepareReport.resources
 C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\obj\Debug\InAndOut.Register.resources
 C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\obj\Debug\InAndOut.Login.resources
 C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\obj\Debug\InAndOut.Properties.Resources.resources

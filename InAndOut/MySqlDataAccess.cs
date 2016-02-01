@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Threading;
 
 namespace InAndOut
 {
@@ -117,6 +118,7 @@ namespace InAndOut
         {
             conn.Open();
             MySqlCommand command = new MySqlCommand(storedProcedure, conn);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-AR");
             var dateFrom = DateTime.ParseExact(date1, ConfigurationManager.AppSettings["DateFormat"], CultureInfo.InvariantCulture);
             var dateTo = DateTime.ParseExact(date2, ConfigurationManager.AppSettings["DateFormat"], CultureInfo.InvariantCulture);
             command.CommandType = CommandType.StoredProcedure;
@@ -142,12 +144,12 @@ namespace InAndOut
             //conn.Open();
 
             string query = sqlCommand;
-
-            DateTime dt = DateTime.ParseExact(currentTime, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.InvariantCulture);
-
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-AR");
+            DateTime dt = DateTime.ParseExact(currentTime, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.CurrentCulture);
+           
             command2.Parameters.AddWithValue("@userId", userId);
-            command2.Parameters.AddWithValue("@fecha", dt.Date);
-            command2.Parameters.AddWithValue("@hora", dt.TimeOfDay);
+            command2.Parameters.AddWithValue("@fecha", dt.ToShortDateString());
+            command2.Parameters.AddWithValue("@hora", dt.ToString("HH:mm"));
             command2.Parameters.AddWithValue("@actionId", action);
 
             // ... other parameters

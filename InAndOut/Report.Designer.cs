@@ -39,6 +39,7 @@
             // 
             // date_from
             // 
+            this.date_from.CustomFormat = "";
             this.date_from.Location = new System.Drawing.Point(72, 22);
             this.date_from.Name = "date_from";
             this.date_from.Size = new System.Drawing.Size(200, 20);

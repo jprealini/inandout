@@ -38,11 +38,9 @@
             this.registrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.herramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarReporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.armarInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.verReportesMensualesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ingresoManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actual_user = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.ingresoManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -124,8 +122,6 @@
             // 
             this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generarReporteToolStripMenuItem,
-            this.armarInfoToolStripMenuItem,
-            this.verReportesMensualesToolStripMenuItem,
             this.ingresoManualToolStripMenuItem});
             this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
             this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
@@ -134,23 +130,16 @@
             // generarReporteToolStripMenuItem
             // 
             this.generarReporteToolStripMenuItem.Name = "generarReporteToolStripMenuItem";
-            this.generarReporteToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.generarReporteToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.generarReporteToolStripMenuItem.Text = "Generar Reporte...";
             this.generarReporteToolStripMenuItem.Click += new System.EventHandler(this.generarReporteToolStripMenuItem_Click);
             // 
-            // armarInfoToolStripMenuItem
+            // ingresoManualToolStripMenuItem
             // 
-            this.armarInfoToolStripMenuItem.Name = "armarInfoToolStripMenuItem";
-            this.armarInfoToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.armarInfoToolStripMenuItem.Text = "Recopilar Reportes...";
-            this.armarInfoToolStripMenuItem.Click += new System.EventHandler(this.armarInfoToolStripMenuItem_Click);
-            // 
-            // verReportesMensualesToolStripMenuItem
-            // 
-            this.verReportesMensualesToolStripMenuItem.Name = "verReportesMensualesToolStripMenuItem";
-            this.verReportesMensualesToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.verReportesMensualesToolStripMenuItem.Text = "Ver Reportes Mensuales...";
-            this.verReportesMensualesToolStripMenuItem.Click += new System.EventHandler(this.verReportesMensualesToolStripMenuItem_Click);
+            this.ingresoManualToolStripMenuItem.Name = "ingresoManualToolStripMenuItem";
+            this.ingresoManualToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.ingresoManualToolStripMenuItem.Text = "Ingreso Manual...";
+            this.ingresoManualToolStripMenuItem.Click += new System.EventHandler(this.ingresoManualToolStripMenuItem_Click);
             // 
             // actual_user
             // 
@@ -170,13 +159,6 @@
             this.label1.Size = new System.Drawing.Size(103, 17);
             this.label1.TabIndex = 7;
             this.label1.Text = "Usuario Actual :";
-            // 
-            // ingresoManualToolStripMenuItem
-            // 
-            this.ingresoManualToolStripMenuItem.Name = "ingresoManualToolStripMenuItem";
-            this.ingresoManualToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.ingresoManualToolStripMenuItem.Text = "Ingreso Manual...";
-            this.ingresoManualToolStripMenuItem.Click += new System.EventHandler(this.ingresoManualToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -218,8 +200,6 @@
         private System.Windows.Forms.TextBox actual_user;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem generarReporteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem armarInfoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem verReportesMensualesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ingresoManualToolStripMenuItem;
     }
 }
