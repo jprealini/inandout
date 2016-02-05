@@ -44,7 +44,7 @@ namespace InAndOut
                         break;
                 }           
             MessageBox.Show("El reporte ha sigo generado exitosamente");
-            this.Close();
+            
             }
             else
                 MessageBox.Show("Seleccione un tipo de reporte");

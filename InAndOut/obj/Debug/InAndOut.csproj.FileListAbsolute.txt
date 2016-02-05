@@ -19,3 +19,24 @@ C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\bin
 C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\bin\Debug\MySql.Web.dll
 C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\bin\Debug\EntityFramework.xml
 C:\Users\jrealini.VP\Documents\Visual Studio 2013\Projects\InAndOut\InAndOut\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\InAndOut.exe.config
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.exe
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.pdb
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\InAndOut.exe
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\InAndOut.pdb
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\EntityFramework.dll
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\MySql.Data.dll
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\mysql.data.entity.EF6.dll
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\MySql.Web.dll
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\EntityFramework.xml
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.csprojResolveAssemblyReference.cache
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.DateAndTimeOverride.resources
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Form1.resources
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.MonthlyReports.resources
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Register.resources
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Login.resources
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Properties.Resources.resources
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Report.resources
+C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.csproj.GenerateResource.Cache

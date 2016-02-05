@@ -42,6 +42,7 @@
             this.user_txtBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.user_txtBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.user_txtBox.Location = new System.Drawing.Point(99, 22);
+            this.user_txtBox.Margin = new System.Windows.Forms.Padding(3, 5, 3, 1);
             this.user_txtBox.Name = "user_txtBox";
             this.user_txtBox.Size = new System.Drawing.Size(155, 22);
             this.user_txtBox.TabIndex = 1;
@@ -49,8 +50,9 @@
             // pass_txtBox
             // 
             this.pass_txtBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pass_txtBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pass_txtBox.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pass_txtBox.Location = new System.Drawing.Point(99, 50);
+            this.pass_txtBox.Margin = new System.Windows.Forms.Padding(3, 5, 3, 1);
             this.pass_txtBox.Name = "pass_txtBox";
             this.pass_txtBox.Size = new System.Drawing.Size(155, 22);
             this.pass_txtBox.TabIndex = 2;
@@ -99,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 125);
+            this.ClientSize = new System.Drawing.Size(284, 121);
             this.Controls.Add(this.ok_Button);
             this.Controls.Add(this.cancel_Button);
             this.Controls.Add(this.label2);

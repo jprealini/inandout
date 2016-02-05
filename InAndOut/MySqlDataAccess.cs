@@ -78,8 +78,6 @@ namespace InAndOut
                 Console.Write(ex.Message);
                 return 0;
             }
-
-
         }
 
         public bool GetUser(string sqlCommand, string user, byte[] password)
@@ -129,31 +127,39 @@ namespace InAndOut
             MySqlDataReader dr = command.ExecuteReader();
 
             IO io = new IO();
+            ExcelUtility eu = new ExcelUtility();
 
-            io.WriteToFile(Filename, dr);
+            var dataTable = new DataTable();
+            dataTable.Load(dr);
+
+            eu.WriteDataTableToExcel(dataTable,"Prueba","C:\\prueba.xlsx","Test");
+            
+            //io.WriteToFile(Filename, dr);
         }
 
-        public void SaveAction(string sqlCommand, int userId, Enums.Actions action, string currentTime)
+        public void SaveAction(string sqlCommand, int userId, Enums.Actions action, string currentTime, string observaciones, string station)
         {
-            MySqlCommand command2 = new MySqlCommand();
-            command2.Connection = conn;
-            command2.CommandType = CommandType.Text;
-            command2.CommandText = sqlCommand;
+            MySqlCommand command = new MySqlCommand();
+            command.Connection = conn;
+            command.CommandType = CommandType.Text;
+            command.CommandText = sqlCommand;
 
-            conn.Open();
-            //conn.Open();
+            
 
             string query = sqlCommand;
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-AR");
             DateTime dt = DateTime.ParseExact(currentTime, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.CurrentCulture);
            
-            command2.Parameters.AddWithValue("@userId", userId);
-            command2.Parameters.AddWithValue("@fecha", dt.ToShortDateString());
-            command2.Parameters.AddWithValue("@hora", dt.ToString("HH:mm"));
-            command2.Parameters.AddWithValue("@actionId", action);
-
+            command.Parameters.AddWithValue("@userId", userId);
+            command.Parameters.AddWithValue("@fecha", dt.ToShortDateString());
+            command.Parameters.AddWithValue("@hora", dt.ToString("HH:mm"));
+            command.Parameters.AddWithValue("@actionId", action);
+            command.Parameters.AddWithValue("@station", station);
+            command.Parameters.AddWithValue("@observaciones", observaciones);
+            conn.Open();
+            //conn.Open();
             // ... other parameters
-            command2.ExecuteNonQuery();
+            command.ExecuteNonQuery();
             
             conn.Close();
         }
@@ -180,87 +186,6 @@ namespace InAndOut
             command.ExecuteNonQuery();
 
             conn.Close();
-        }
-
-        public void InsertDataIntoMySQLServerUsingBulkCopy(DataTable csvFileData)
-        {
-            using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.ConnectionStrings[2].ToString()))
-            {
-                conn.Open();
-
-                String sql = null;
-                String sqlStart = "INSERT into TempConsolidatedReport Values ";
-                int x = 0;
-
-
-                var newDataTable = csvFileData.AsEnumerable()
-               .OrderBy(r => r.Field<string>("Usuario"))
-               .ThenBy(r => r.Field<string>("fecha"))
-               .ThenBy(r => r.Field<string>("hora"))
-               .CopyToDataTable();
-
-                foreach (DataRow row in newDataTable.Rows)
-                {
-                    x += 1;
-                    if (x == 1)
-                    {
-                        sql = String.Format(@"({0},{1},{2},{3})",
-                                              row["Usuario"],
-                                              row["fecha"],
-                                              row["hora"],
-                                              row["Evento"]
-                                              );
-                    }
-                    else
-                    {
-                        sql = String.Format(sql + @",({0},{1},{2},{3})",
-                                              row["Usuario"],
-                                              row["fecha"],
-                                              row["hora"],
-                                              row["Evento"]
-                                              );
-
-                    }
-
-                    if (x == 1000)
-                    {
-                        try
-                        {
-                            sql = sqlStart + sql;
-                            MySqlCommand cmd = new MySqlCommand(sql, conn);
-                            cmd.ExecuteNonQuery();
-                            Console.WriteLine("Write {0}", x);
-                            x = 0;
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(sql);
-                            Console.WriteLine(ex.ToString());
-                        }
-                    }
-
-                }
-                // get any straglers
-                if (x > 0)
-                {
-                    try
-                    {
-                        sql = sqlStart + sql;
-                        MySqlCommand cmd = new MySqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        Console.WriteLine("Write {0}", x);
-                        x = 0;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(sql);
-                        Console.WriteLine(ex.ToString());
-                    }
-
-                }
-
-                conn.Close();
-            }
-        }
+        }        
     }
 }
