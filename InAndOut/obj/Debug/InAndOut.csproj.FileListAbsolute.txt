@@ -32,7 +32,6 @@ C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\MySql.
 C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\EntityFramework.xml
 C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.csprojResolveAssemblyReference.cache
-C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.DateAndTimeOverride.resources
 C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Form1.resources
 C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.MonthlyReports.resources
 C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Register.resources

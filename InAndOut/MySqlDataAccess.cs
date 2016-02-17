@@ -132,7 +132,7 @@ namespace InAndOut
             var dataTable = new DataTable();
             dataTable.Load(dr);
 
-            eu.WriteDataTableToExcel(dataTable,"Prueba","C:\\prueba.xlsx","Test");
+            eu.WriteDataTableToExcel(dataTable,"Prueba","C:\\" + Filename,"Test");
             
             //io.WriteToFile(Filename, dr);
         }
@@ -156,12 +156,100 @@ namespace InAndOut
             command.Parameters.AddWithValue("@actionId", action);
             command.Parameters.AddWithValue("@station", station);
             command.Parameters.AddWithValue("@observaciones", observaciones);
-            conn.Open();
-            //conn.Open();
-            // ... other parameters
-            command.ExecuteNonQuery();
+
             
-            conn.Close();
+            try
+            {
+                conn.Open();
+                //conn.Open();
+                // ... other parameters
+                command.ExecuteNonQuery();
+            
+                conn.Close();
+            }
+            catch(Exception ex)
+            {
+                //Creates the INSERT command to save in a file in case the connection drops
+                var queryTest = CommandAsSql(command);
+                IO io = new IO();
+                io.WriteToFile("C:\\ActivityBackup.txt", queryTest);
+            }
+            
+        }
+
+        public string CommandAsSql(MySqlCommand sc)
+        {
+            string sql = sc.CommandText;
+
+            sql = sql.Replace("\r\n", "").Replace("\r", "").Replace("\n", "");
+            sql = System.Text.RegularExpressions.Regex.Replace(sql, @"\s+", " ");
+
+            foreach (MySqlParameter sp in sc.Parameters)
+            {
+                string spName = sp.ParameterName;
+                string spValue = ParameterValueForSQL(sp);
+                sql = sql.Replace(spName, spValue);
+            }
+
+            sql = sql.Replace("= NULL", "IS NULL");
+            sql = sql.Replace("!= NULL", "IS NOT NULL");
+            return sql;
+        }
+
+        public string ParameterValueForSQL(MySqlParameter sp)
+        {
+            string retval = "";
+
+            switch (sp.MySqlDbType)
+            {
+                case MySqlDbType.Text:
+                case MySqlDbType.Time:
+                case MySqlDbType.VarChar:
+                case MySqlDbType.Date:
+                case MySqlDbType.DateTime:
+                    if (sp.Value == null)
+                    {
+                        retval = "NULL";
+                    }
+                    else
+                    {
+                        retval = "'" + sp.Value.ToString().Replace("'", "''") + "'";
+                    }
+                    break;
+
+                case MySqlDbType.Bit:
+                    if (sp.Value == null)
+                    {
+                        retval = "NULL";
+                    }
+                    else
+                    {
+                        retval = ((bool)sp.Value == false) ? "0" : "1";
+                    }
+                    break;
+                case MySqlDbType.Int32:
+                    if (sp.Value == null)
+                    {
+                        retval = "NULL";
+                    }
+                    else 
+                    {
+                        retval = ((int)sp.Value).ToString();
+                    }
+                    break;
+                default:
+                    if (sp.Value == null)
+                    {
+                        retval = "NULL";
+                    }
+                    else
+                    {
+                        retval = sp.Value.ToString().Replace("'", "''");
+                    }
+                    break;
+            }
+
+            return retval;
         }
 
         public void RegisterUser(string sqlCommand, string user, byte[] password)

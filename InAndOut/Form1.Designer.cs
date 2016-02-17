@@ -38,7 +38,6 @@
             this.registrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.herramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarReporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ingresoManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actual_user = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.observaciones_txt = new System.Windows.Forms.TextBox();
@@ -126,8 +125,7 @@
             // herramientasToolStripMenuItem
             // 
             this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generarReporteToolStripMenuItem,
-            this.ingresoManualToolStripMenuItem});
+            this.generarReporteToolStripMenuItem});
             this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
             this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
             this.herramientasToolStripMenuItem.Text = "Herramientas";
@@ -138,13 +136,6 @@
             this.generarReporteToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.generarReporteToolStripMenuItem.Text = "Generar Reporte...";
             this.generarReporteToolStripMenuItem.Click += new System.EventHandler(this.generarReporteToolStripMenuItem_Click);
-            // 
-            // ingresoManualToolStripMenuItem
-            // 
-            this.ingresoManualToolStripMenuItem.Name = "ingresoManualToolStripMenuItem";
-            this.ingresoManualToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.ingresoManualToolStripMenuItem.Text = "Ingreso Manual...";
-            this.ingresoManualToolStripMenuItem.Click += new System.EventHandler(this.ingresoManualToolStripMenuItem_Click);
             // 
             // actual_user
             // 
@@ -253,7 +244,6 @@
         private System.Windows.Forms.TextBox actual_user;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem generarReporteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ingresoManualToolStripMenuItem;
         private System.Windows.Forms.TextBox observaciones_txt;
         private System.Windows.Forms.DateTimePicker hora_ingreso_dtp;
         private System.Windows.Forms.DateTimePicker hora_egreso_dtp;

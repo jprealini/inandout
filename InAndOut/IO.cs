@@ -95,6 +95,24 @@ namespace InAndOut
             }
         }
 
+        /// <summary>
+        /// This method writes to a file the insert commands saved in case the connection drops when saving an activity, 
+        /// in order to use them later to insert them in the db
+        /// </summary>
+        /// <param name="Filename"></param>
+        /// <param name="command"></param>
+        public void WriteToFile(string Filename, string command)
+        {
+            // Compose a string that consists of three lines.
+            string lines = command;
+
+            // Write the string to a file.
+            System.IO.StreamWriter file = new System.IO.StreamWriter(Filename, true);
+            file.WriteLine(lines);
+
+            file.Close();
+        }
+
         public DataTable GetDataTabletFromCSVFile(string csv_file_path)
         {
             DataTable csvData = new DataTable();

@@ -76,12 +76,6 @@
     <Compile Include="ExcelUtility.cs" />
     <Compile Include="MySqlDataAccess.cs" />
     <Compile Include="DataAccess.cs" />
-    <Compile Include="DateAndTimeOverride.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DateAndTimeOverride.Designer.cs">
-      <DependentUpon>DateAndTimeOverride.cs</DependentUpon>
-    </Compile>
     <Compile Include="Enums.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -117,9 +111,6 @@
     <Compile Include="Report.Designer.cs">
       <DependentUpon>Report.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="DateAndTimeOverride.resx">
-      <DependentUpon>DateAndTimeOverride.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
