@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using Microsoft.VisualBasic.FileIO;
 using System.Web;
+using System.IO;
 
 namespace InAndOut
 {
@@ -151,5 +152,34 @@ namespace InAndOut
             return csvData;
         }
 
+        public bool UpdateDBase(string path)
+        {
+            bool status = false;
+            string line;
+
+            if (File.Exists(path))
+            {
+                try
+                {
+                    MySqlDataAccess da = new MySqlDataAccess();
+                    System.IO.StreamReader file = new System.IO.StreamReader(path);
+
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        da.SaveOfflineAction(line);
+                    }
+
+                    status = true;
+                    file.Close();
+                    File.Delete(path);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }                
+            }
+
+            return status;
+        }
     }
 }

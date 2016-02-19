@@ -22,7 +22,7 @@ namespace InAndOut
         private void button1_Click(object sender, EventArgs e)
         {
             MySqlDataAccess dAccess = new MySqlDataAccess();
-            var date1 = date_from.Value.ToShortDateString();
+            var date1 = date_from.Value.ToString("d/M/yyyy");
             var date2 = date_to.Value.ToString("d/M/yyyy");
             var type = reportType_cmb.SelectedIndex;
             var timestamp = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString();

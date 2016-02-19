@@ -184,12 +184,19 @@ namespace InAndOut
         }
 
         private void RegisterEvent(Enums.Actions action, string observaciones, string station)
-        {
-                MySqlDataAccess mySqlDAccess = new MySqlDataAccess();
-                string mySqlcommand = "INSERT INTO Activity (userId, fecha, hora, actionId, estacion, observaciones)";
-                mySqlcommand += " VALUES (@userId, @fecha, @hora, @actionId, @station, @observaciones)";
+        {            
+            MySqlDataAccess mySqlDAccess = new MySqlDataAccess();
+            string mySqlcommand = "INSERT INTO Activity (userId, fecha, hora, actionId, estacion, observaciones)";
+            mySqlcommand += " VALUES (@userId, @fecha, @hora, @actionId, @station, @observaciones)";
+            try
+            {
                 mySqlDAccess.SaveAction(mySqlcommand, Global.appUserId, action, currentTime.Text, observaciones, station);
-                       
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+                      
         }
 
         private void StartTimer()
@@ -273,6 +280,21 @@ namespace InAndOut
                 observaciones_txt.Enabled = true;
             else
                 observaciones_txt.Enabled = false;
+        }
+
+        private void subirRegistroLocalMenu_Click(object sender, EventArgs e)
+        {
+            IO io = new IO();
+            if (io.UpdateDBase(ConfigurationManager.AppSettings["BackupPath"]))
+            {
+                MessageBox.Show("Base de datos actualizada correctamente");
+                GetStatus();
+            }
+            else
+            {
+                MessageBox.Show("Error al actualizar la base de datos. Comuniquese con JP.");
+            }
+                
         }
     }
 }

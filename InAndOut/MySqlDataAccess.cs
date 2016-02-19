@@ -122,8 +122,9 @@ namespace InAndOut
             command.CommandType = CommandType.StoredProcedure;
 
             command.Parameters.AddWithValue("@userId", userId);
-            command.Parameters.AddWithValue("@dateFrom", dateFrom);
-            command.Parameters.AddWithValue("@dateTo", dateTo);
+            command.Parameters.AddWithValue("@dateFrom", date1);
+            command.Parameters.AddWithValue("@dateTo", date2);
+            var queryTest = CommandAsSql(command);
             MySqlDataReader dr = command.ExecuteReader();
 
             IO io = new IO();
@@ -137,14 +138,38 @@ namespace InAndOut
             //io.WriteToFile(Filename, dr);
         }
 
-        public void SaveAction(string sqlCommand, int userId, Enums.Actions action, string currentTime, string observaciones, string station)
+        public void SaveOfflineAction(string sqlCommand)
         {
             MySqlCommand command = new MySqlCommand();
             command.Connection = conn;
             command.CommandType = CommandType.Text;
             command.CommandText = sqlCommand;
 
-            
+            try
+            {
+                conn.Open();
+                //conn.Open();
+                // ... other parameters
+                command.ExecuteNonQuery();
+
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                //Creates the INSERT command to save in a file in case the connection drops
+                var queryTest = CommandAsSql(command);
+                IO io = new IO();
+                io.WriteToFile(ConfigurationManager.AppSettings["BackupPath"], queryTest);
+                throw new Exception("Error en conexion. Se ha registrado la actividad en forma local.\n\r" + ex.Message);
+            }
+        }
+
+        public void SaveAction(string sqlCommand, int userId, Enums.Actions action, string currentTime, string observaciones, string station)
+        {
+            MySqlCommand command = new MySqlCommand();
+            command.Connection = conn;
+            command.CommandType = CommandType.Text;
+            command.CommandText = sqlCommand;            
 
             string query = sqlCommand;
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-AR");
@@ -156,7 +181,6 @@ namespace InAndOut
             command.Parameters.AddWithValue("@actionId", action);
             command.Parameters.AddWithValue("@station", station);
             command.Parameters.AddWithValue("@observaciones", observaciones);
-
             
             try
             {
@@ -172,10 +196,10 @@ namespace InAndOut
                 //Creates the INSERT command to save in a file in case the connection drops
                 var queryTest = CommandAsSql(command);
                 IO io = new IO();
-                io.WriteToFile("C:\\ActivityBackup.txt", queryTest);
-            }
-            
-        }
+                io.WriteToFile(ConfigurationManager.AppSettings["BackupPath"], queryTest);
+                throw new Exception("Error en conexion. Se ha registrado la actividad en forma local.\n\r" + ex.Message);
+            }            
+        }        
 
         public string CommandAsSql(MySqlCommand sc)
         {

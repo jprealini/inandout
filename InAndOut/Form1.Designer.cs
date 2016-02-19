@@ -45,6 +45,7 @@
             this.hora_egreso_dtp = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.subirRegistroLocalMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,7 +126,8 @@
             // herramientasToolStripMenuItem
             // 
             this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generarReporteToolStripMenuItem});
+            this.generarReporteToolStripMenuItem,
+            this.subirRegistroLocalMenu});
             this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
             this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
             this.herramientasToolStripMenuItem.Text = "Herramientas";
@@ -133,7 +135,7 @@
             // generarReporteToolStripMenuItem
             // 
             this.generarReporteToolStripMenuItem.Name = "generarReporteToolStripMenuItem";
-            this.generarReporteToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.generarReporteToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.generarReporteToolStripMenuItem.Text = "Generar Reporte...";
             this.generarReporteToolStripMenuItem.Click += new System.EventHandler(this.generarReporteToolStripMenuItem_Click);
             // 
@@ -199,6 +201,13 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "Horario de hoy:";
             // 
+            // subirRegistroLocalMenu
+            // 
+            this.subirRegistroLocalMenu.Name = "subirRegistroLocalMenu";
+            this.subirRegistroLocalMenu.Size = new System.Drawing.Size(187, 22);
+            this.subirRegistroLocalMenu.Text = "Subir Registro Local...";
+            this.subirRegistroLocalMenu.Click += new System.EventHandler(this.subirRegistroLocalMenu_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -249,6 +258,7 @@
         private System.Windows.Forms.DateTimePicker hora_egreso_dtp;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem subirRegistroLocalMenu;
     }
 }
 
