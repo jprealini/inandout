@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace InAndOut
 {
@@ -133,7 +134,23 @@ namespace InAndOut
             var dataTable = new DataTable();
             dataTable.Load(dr);
 
-            eu.WriteDataTableToExcel(dataTable,"Prueba","C:\\" + Filename,"Test");
+            List<DataTable> result = dataTable.AsEnumerable()
+            .GroupBy(row => row.Field<string>("username"))
+            .Select(g => g.CopyToDataTable())
+            .ToList();
+
+            DataSet tables = new DataSet();
+
+            foreach (var t in result)
+            {
+                t.TableName = t.Select().First().Field<string>(1);
+                tables.Tables.Add(t);
+            }
+                
+
+            eu.ExportDataSetToExcel(tables, Application.StartupPath, Filename);
+
+            //eu.WriteDataTableToExcel(dataTable,"Prueba","C:\\" + Filename,"Test");
             
             //io.WriteToFile(Filename, dr);
         }

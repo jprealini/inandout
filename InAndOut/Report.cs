@@ -31,16 +31,16 @@ namespace InAndOut
                 switch(type)
                 {
                     case 0:
-                        dAccess.GetRecords("Count_Hours_2", "ReporteTotales" + Global.appUser + "-" + timestamp, date1, date2, Global.appUserId);
+                        dAccess.GetRecords("Count_Hours_2", @"\ReporteTotales" + Global.appUser + "-" + timestamp + ".xlsx", date1, date2, Global.appUserId);
                         break;
                     case 1:
-                        dAccess.GetRecords("Raw_Report_2", "ReporteDetallado" + Global.appUser + "-" + timestamp, date1, date2, Global.appUserId);
+                        dAccess.GetRecords("Raw_Report_2", @"\ReporteDetallado" + Global.appUser + "-" + timestamp + ".xlsx", date1, date2, Global.appUserId);
                         break;
                     case 2:
-                        dAccess.GetRecords("Count_Hours_2", "ReporteTotalesGeneral-" + timestamp, date1, date2);
+                        dAccess.GetRecords("Count_Hours_2", @"\ReporteTotalesGeneral-" + timestamp + ".xlsx", date1, date2);
                         break;
                     case 3:
-                        dAccess.GetRecords("Raw_Report_2", "ReporteDetalladoGeneral-" + timestamp, date1, date2);
+                        dAccess.GetRecords("Raw_Report_2", @"\ReporteDetalladoGeneral-" + timestamp + ".xlsx", date1, date2);
                         break;
                 }           
             MessageBox.Show("El reporte ha sigo generado exitosamente");

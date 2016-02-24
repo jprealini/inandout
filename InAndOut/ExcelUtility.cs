@@ -132,5 +132,87 @@ namespace InAndOut
             }
         }
 
+        /// <summary>
+        /// Fuction to export dataset to excel
+        /// </summary>
+        /// <param name="ds"></param>
+        public void ExportDataSetToExcel(DataSet ds, string strPath, string Filename)
+        {
+            int inHeaderLength = 3, inColumn = 0, inRow = 0;
+            System.Reflection.Missing Default = System.Reflection.Missing.Value;
+            //Create Excel File
+            strPath += Filename;
+            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook excelWorkBook = excelApp.Workbooks.Add(1);
+            foreach (DataTable dtbl in ds.Tables)
+            {
+                //Create Excel WorkSheet
+                Microsoft.Office.Interop.Excel.Worksheet excelWorkSheet = excelWorkBook.Sheets.Add(Default, excelWorkBook.Sheets[excelWorkBook.Sheets.Count], 1, Default);
+                excelWorkSheet.Name = dtbl.TableName;//Name worksheet
+
+                //Write Column Name
+                for (int i = 0; i < dtbl.Columns.Count; i++)
+                    excelWorkSheet.Cells[inHeaderLength + 1, i + 1] = dtbl.Columns[i].ColumnName.ToUpper();
+                
+                
+                //Write Rows
+                for (int m = 0; m < dtbl.Rows.Count; m++)
+                {
+                    int minutos;
+                    for (int n = 0; n < dtbl.Columns.Count; n++)
+                    {
+                        inColumn = n + 1;
+                        inRow = inHeaderLength + 2 + m;
+                        excelWorkSheet.Cells[inRow, inColumn] = dtbl.Rows[m].ItemArray[n].ToString();
+                        minutos = ((int)dtbl.Rows[m].ItemArray[5] * 60) + (int)dtbl.Rows[m].ItemArray[6];
+                        if (m % 2 == 0)
+                            excelWorkSheet.get_Range("A" + inRow.ToString(), "H" + inRow.ToString()).Interior.Color = System.Drawing.ColorTranslator.FromHtml("#CCC");
+                        
+                        if(minutos < 465)
+                            excelWorkSheet.get_Range("A" + inRow.ToString(), "H" + inRow.ToString()).Interior.Color = System.Drawing.ColorTranslator.FromHtml("#E11");
+                        else if (minutos > 495)
+                            excelWorkSheet.get_Range("A" + inRow.ToString(), "H" + inRow.ToString()).Interior.Color = System.Drawing.ColorTranslator.FromHtml("#1E1");
+
+                    }
+                }
+
+                //Excel Header
+                Microsoft.Office.Interop.Excel.Range cellRang = excelWorkSheet.get_Range("A1", "H3");
+                cellRang.Merge(false);
+                cellRang.Interior.Color = System.Drawing.Color.White;
+                cellRang.Font.Color = System.Drawing.Color.Gray;
+                cellRang.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                cellRang.VerticalAlignment = Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
+                cellRang.Font.Size = 26;
+                excelWorkSheet.Cells[1, 1] = "Reporte Mensual";
+
+                //Style table column names
+                cellRang = excelWorkSheet.get_Range("A4", "H4");
+                cellRang.Font.Bold = true;
+                cellRang.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.White);
+                cellRang.Interior.Color = System.Drawing.ColorTranslator.FromHtml("#ED7D31");
+                excelWorkSheet.get_Range("F4").EntireColumn.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
+                //Formate price column
+                //excelWorkSheet.get_Range("F5").EntireColumn.NumberFormat = "0.00";
+                //Auto fit columns
+                excelWorkSheet.Columns.AutoFit();
+            }
+
+            //Delete First Page
+            excelApp.DisplayAlerts = false;
+            Microsoft.Office.Interop.Excel.Worksheet lastWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelWorkBook.Worksheets[1];
+            lastWorkSheet.Delete();
+            excelApp.DisplayAlerts = true;
+
+            //Set Defualt Page
+            (excelWorkBook.Sheets[1] as Microsoft.Office.Interop.Excel._Worksheet).Activate();
+
+            excelWorkBook.SaveAs(strPath, Default, Default, Default, false, Default, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange, Default, Default, Default, Default, Default);
+            excelWorkBook.Close();
+            excelApp.Quit();
+
+            MessageBox.Show("El reporte se ha generado exitosamente \n As " + strPath);
+        }
+
     }
 }
