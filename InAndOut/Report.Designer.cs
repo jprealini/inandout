@@ -84,10 +84,8 @@
             // 
             this.reportType_cmb.FormattingEnabled = true;
             this.reportType_cmb.Items.AddRange(new object[] {
-            "Usuario Actual Total",
-            "Usuario Actual Detalle",
-            "General Total",
-            "General Detalle"});
+            "Totales",
+            "Detalle"});
             this.reportType_cmb.Location = new System.Drawing.Point(72, 97);
             this.reportType_cmb.Name = "reportType_cmb";
             this.reportType_cmb.Size = new System.Drawing.Size(200, 21);
@@ -107,7 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 187);
+            this.ClientSize = new System.Drawing.Size(284, 186);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.reportType_cmb);
             this.Controls.Add(this.button1);
