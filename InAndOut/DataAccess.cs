@@ -73,6 +73,7 @@ namespace InAndOut
                 {
                     Global.appUser = (string)reader["userName"];
                     Global.appUserId = (int)reader["id"];
+                    Global.appUserIsAdmin = (bool)reader["isAdmin"];
 
                 }
                 reader.Close();

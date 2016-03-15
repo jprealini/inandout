@@ -16,7 +16,7 @@ namespace InAndOut
         {
             InitializeComponent();
             this.ActiveControl = user_txtBox;
-            pass_txtBox.PasswordChar = '⚫';
+            pass_txtBox.PasswordChar = '*';
             user_txtBox.CharacterCasing = CharacterCasing.Lower;
             // Align the text in the center of the TextBox control.
             pass_txtBox.TextAlign = HorizontalAlignment.Center;

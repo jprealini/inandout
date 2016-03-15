@@ -46,8 +46,7 @@ namespace InAndOut
             hora_egreso_dtp.ShowUpDown = true;
             hora_egreso_dtp.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 15, 0, 0);
 
-            GetStatus();
-            
+            GetStatus();            
         }
 
         private void GetStatus()
@@ -82,7 +81,15 @@ namespace InAndOut
                     observaciones_txt.Text = "Observaciones...";
                     currentTime.ForeColor = Color.Green;
                     break;                
-            }            
+            }
+            if (Global.appUserIsAdmin)
+                generarReporteToolStripMenuItem.Enabled = true;
+            else
+                generarReporteToolStripMenuItem.Enabled = false;
+
+            if (File.Exists(ConfigurationManager.AppSettings["BackupPath"]))
+                labelFichadasLocales.Visible = true;           
+
         }
 
         private int GetLastActivity()
@@ -100,7 +107,7 @@ namespace InAndOut
             {
                 //DateTime dt = DateTime.ParseExact(currentTime.Text, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.CurrentCulture);
                 var diff = (fechaActual - hora_ingreso_dtp.Value).TotalDays * 24 * 60;
-                if (fechaActual > hora_ingreso_dtp.Value && Math.Abs(diff) > 15)
+                if (Math.Abs(diff) > 15)
                 {
                     if (observaciones_txt.Text == "Observaciones...")
                         MessageBox.Show("Especifique en el campo Observaciones el motivo de su ingreso a esta hora");
@@ -145,7 +152,7 @@ namespace InAndOut
             {
                 //DateTime dt = DateTime.ParseExact(currentTime.Text, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.CurrentCulture);
                 var diff = (fechaActual - hora_egreso_dtp.Value).TotalDays * 24 * 60;
-                if ((fechaActual < hora_egreso_dtp.Value) && (Math.Abs(diff) > 15))
+                if (Math.Abs(diff) > 15)
                 {
                     if (observaciones_txt.Text == "Observaciones...")
                         MessageBox.Show("Especifique en el campo Observaciones el motivo de su egreso a esta hora");
@@ -266,7 +273,7 @@ namespace InAndOut
         {
             //DateTime dt = DateTime.ParseExact(currentTime.Text, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.CurrentCulture);
             var diff = (fechaActual - hora_ingreso_dtp.Value).TotalDays * 24 * 60;
-            if ((fechaActual > hora_ingreso_dtp.Value) && (Math.Abs(diff) > 15))
+            if (Math.Abs(diff) > 15)
                 observaciones_txt.Enabled = true;
             else
                 observaciones_txt.Enabled = false;
@@ -276,7 +283,7 @@ namespace InAndOut
         {
             //DateTime dt = DateTime.ParseExact(currentTime.Text, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.CurrentCulture);
             var diff = (fechaActual - hora_egreso_dtp.Value).TotalDays * 24 * 60;
-            if ((fechaActual < hora_egreso_dtp.Value) && (Math.Abs(diff) > 15))
+            if (Math.Abs(diff) > 15)
                 observaciones_txt.Enabled = true;
             else
                 observaciones_txt.Enabled = false;
@@ -288,6 +295,7 @@ namespace InAndOut
             if (io.UpdateDBase(ConfigurationManager.AppSettings["BackupPath"]))
             {
                 MessageBox.Show("Base de datos actualizada correctamente");
+                labelFichadasLocales.Visible = false;
                 GetStatus();
             }
             else

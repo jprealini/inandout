@@ -104,6 +104,7 @@ namespace InAndOut
                 {
                     Global.appUser = (string)reader["userName"];
                     Global.appUserId = (int)reader["id"];
+                    Global.appUserIsAdmin = (bool)reader["isAdmin"];
                 }
                 reader.Close();
                 conn.Close();
@@ -145,8 +146,7 @@ namespace InAndOut
             {
                 t.TableName = t.Select().First().Field<string>(1);
                 tables.Tables.Add(t);
-            }
-                
+            }                
 
             eu.ExportDataSetToExcel(tables, Application.StartupPath, Filename);
 
