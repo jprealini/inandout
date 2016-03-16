@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InAndOut
@@ -15,8 +9,8 @@ namespace InAndOut
         public Login()
         {
             InitializeComponent();
-            this.ActiveControl = user_txtBox;
-            pass_txtBox.PasswordChar = '⚫';
+            ActiveControl = user_txtBox;
+            pass_txtBox.PasswordChar = '*';
             user_txtBox.CharacterCasing = CharacterCasing.Lower;
             // Align the text in the center of the TextBox control.
             pass_txtBox.TextAlign = HorizontalAlignment.Center;
@@ -55,6 +49,11 @@ namespace InAndOut
         {
             user_txtBox.Clear();
             pass_txtBox.Clear();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

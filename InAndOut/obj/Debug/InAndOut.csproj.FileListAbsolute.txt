@@ -40,18 +40,13 @@ C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndO
 C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Report.resources
 C:\Users\jrealini.VP\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.csproj.GenerateResource.Cache
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\InAndOut.exe.config
-C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.exe
-C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.pdb
+C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\InAndOut.exe.manifest
+C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\InAndOut.application
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\InAndOut.exe
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\InAndOut.pdb
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\EntityFramework.dll
-C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\MySql.Data.dll
-C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\mysql.data.entity.EF6.dll
-C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\MySql.Web.dll
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\EntityFramework.xml
-C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.csprojResolveAssemblyReference.cache
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Form1.resources
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.MonthlyReports.resources
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Register.resources
@@ -59,3 +54,9 @@ C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOu
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Properties.Resources.resources
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.Report.resources
 C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.csproj.GenerateResource.Cache
+C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.exe.manifest
+C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.application
+C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.exe
+C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.pdb
+C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\bin\Debug\MySql.Data.Entity.dll
+C:\Users\Juan Pablo\Documents\ProyPersonales\inandout\InAndOut\obj\Debug\InAndOut.csprojResolveAssemblyReference.cache

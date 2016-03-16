@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Threading;
 using System.Windows.Forms;
@@ -86,7 +83,7 @@ namespace InAndOut
 
             MySqlCommand command = new MySqlCommand();
             command.Connection = conn;
-            
+
             // Specify the query to be executed.
             command.CommandType = CommandType.Text;
             command.CommandText = sqlCommand;
@@ -104,6 +101,7 @@ namespace InAndOut
                 {
                     Global.appUser = (string)reader["userName"];
                     Global.appUserId = (int)reader["id"];
+                    Global.appUserIsAdmin = (bool)reader["isAdmin"];
                 }
                 reader.Close();
                 conn.Close();

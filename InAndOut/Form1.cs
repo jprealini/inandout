@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Configuration;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Data.SqlClient;
-using System.Web;
+
 using System.Globalization;
+using System.IO;
 
 namespace InAndOut
 {
@@ -21,7 +14,7 @@ namespace InAndOut
         string dbType = ConfigurationManager.AppSettings["DatabaseType"];
         string station = ConfigurationManager.AppSettings["station"];
         DateTime fechaActual = DateTime.Now;
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -34,7 +27,7 @@ namespace InAndOut
             //Inicia el timer que va a servir para fichar
             StartTimer();
             //Inicializar controles
-            actual_user.Text = Global.appUser;                        
+            actual_user.Text = Global.appUser;
             currentTime.TextAlign = HorizontalAlignment.Center;
             observaciones_txt.Enabled = false;
             //Inicializar control de hora de ingreso
@@ -47,14 +40,13 @@ namespace InAndOut
             hora_egreso_dtp.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 15, 0, 0);
 
             GetStatus();
-            
         }
 
         private void GetStatus()
         {
             var lastActivity = GetLastActivity();
-            
-            switch(lastActivity)
+
+            switch (lastActivity)
             {
                 case 1:
                     in_button.Enabled = false;
@@ -81,26 +73,35 @@ namespace InAndOut
                     hora_egreso_dtp.Enabled = false;
                     observaciones_txt.Text = "Observaciones...";
                     currentTime.ForeColor = Color.Green;
-                    break;                
-            }            
+                    break;
+            }
+            if (Global.appUserIsAdmin)
+                generarReporteToolStripMenuItem.Enabled = true;
+            else
+                generarReporteToolStripMenuItem.Enabled = false;
+
+            if (File.Exists(ConfigurationManager.AppSettings["BackupPath"]))
+                labelFichadasLocales.Visible = true;
+
         }
 
         private int GetLastActivity()
         {
             MySqlDataAccess dAccess = new MySqlDataAccess();
             var result = dAccess.ReadLastActivity("select actionId from Activity where userId = " + Global.appUserId + " order by id desc Limit 1");
-                         
-            return result;        
+
+            return result;
         }
 
         private void in_button_click(object sender, EventArgs e)
         {
+            
             DialogResult dialogResult1 = MessageBox.Show("Confirma que su horario de ingreso hoy es a las " + hora_ingreso_dtp.Value.ToShortTimeString() + " horas?", "Confirmacion de Horario", MessageBoxButtons.YesNo);
             if (dialogResult1 == DialogResult.Yes)
             {
                 //DateTime dt = DateTime.ParseExact(currentTime.Text, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.CurrentCulture);
                 var diff = (fechaActual - hora_ingreso_dtp.Value).TotalDays * 24 * 60;
-                if (fechaActual > hora_ingreso_dtp.Value && Math.Abs(diff) > 15)
+                if (Math.Abs(diff) > 15)
                 {
                     if (observaciones_txt.Text == "Observaciones...")
                         MessageBox.Show("Especifique en el campo Observaciones el motivo de su ingreso a esta hora");
@@ -109,8 +110,10 @@ namespace InAndOut
                         DialogResult dialogResult2 = MessageBox.Show("Confirma que desea registrar el ingreso?", "Confirmacion de Ingreso", MessageBoxButtons.YesNo);
                         if (dialogResult2 == DialogResult.Yes)
                         {
+                            this.Cursor = Cursors.WaitCursor;
                             RegisterEvent(Enums.Actions.IN, observaciones_txt.Text, station);
                             GetStatus();
+                            this.Cursor = Cursors.Default;
                         }
                         else if (dialogResult2 == DialogResult.No)
                         {
@@ -123,19 +126,22 @@ namespace InAndOut
                     DialogResult dialogResult3 = MessageBox.Show("Confirma que desea registrar el ingreso?", "Confirmacion de Ingreso", MessageBoxButtons.YesNo);
                     if (dialogResult3 == DialogResult.Yes)
                     {
+                        this.Cursor = Cursors.WaitCursor;
                         RegisterEvent(Enums.Actions.IN, null, station);
                         GetStatus();
+                        this.Cursor = Cursors.Default;
                     }
                     else if (dialogResult3 == DialogResult.No)
                     {
                         GetStatus();
-                    }                  
+                    }
                 }
             }
             else if (dialogResult1 == DialogResult.No)
             {
                 MessageBox.Show("Especifique correctamente el horario de salida antes de fichar");
-            }           
+            }
+
         }
 
         private void out_button_click(object sender, EventArgs e)
@@ -145,7 +151,7 @@ namespace InAndOut
             {
                 //DateTime dt = DateTime.ParseExact(currentTime.Text, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.CurrentCulture);
                 var diff = (fechaActual - hora_egreso_dtp.Value).TotalDays * 24 * 60;
-                if ((fechaActual < hora_egreso_dtp.Value) && (Math.Abs(diff) > 15))
+                if (Math.Abs(diff) > 15)
                 {
                     if (observaciones_txt.Text == "Observaciones...")
                         MessageBox.Show("Especifique en el campo Observaciones el motivo de su egreso a esta hora");
@@ -167,9 +173,9 @@ namespace InAndOut
                 {
                     DialogResult dialogResult3 = MessageBox.Show("Confirma que desea registrar el egreso?", "Confirmacion de Egreso", MessageBoxButtons.YesNo);
                     if (dialogResult3 == DialogResult.Yes)
-                    {                        
+                    {
                         RegisterEvent(Enums.Actions.OUT, null, station);
-                        GetStatus();                                                
+                        GetStatus();
                     }
                     else if (dialogResult3 == DialogResult.No)
                     {
@@ -180,11 +186,11 @@ namespace InAndOut
             else if (dialogResult1 == DialogResult.No)
             {
                 MessageBox.Show("Especifique correctamente el horario de ingreso antes de fichar");
-            }                  
+            }
         }
 
         private void RegisterEvent(Enums.Actions action, string observaciones, string station)
-        {            
+        {
             MySqlDataAccess mySqlDAccess = new MySqlDataAccess();
             string mySqlcommand = "INSERT INTO Activity (userId, fecha, hora, actionId, estacion, observaciones)";
             mySqlcommand += " VALUES (@userId, @fecha, @hora, @actionId, @station, @observaciones)";
@@ -192,11 +198,11 @@ namespace InAndOut
             {
                 mySqlDAccess.SaveAction(mySqlcommand, Global.appUserId, action, currentTime.Text, observaciones, station);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-                      
+
         }
 
         private void StartTimer()
@@ -232,9 +238,9 @@ namespace InAndOut
         private void registrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Global.appUser = "";
-            actual_user.Text = ""; 
+            actual_user.Text = "";
             Register form = new Register();
-            form.ShowDialog();            
+            form.ShowDialog();
             loginToolStripMenuItem.Text = "Login";
             in_button.Enabled = false;
             out_button.Enabled = false;
@@ -253,9 +259,9 @@ namespace InAndOut
                 ValidateIngreso();
             }
         }
-                
+
         private void hora_egreso_dtp_ValueChanged(object sender, EventArgs e)
-        {            
+        {
             if (currentTime.Text != "")
             {
                 ValidateEgreso();
@@ -266,7 +272,7 @@ namespace InAndOut
         {
             //DateTime dt = DateTime.ParseExact(currentTime.Text, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.CurrentCulture);
             var diff = (fechaActual - hora_ingreso_dtp.Value).TotalDays * 24 * 60;
-            if ((fechaActual > hora_ingreso_dtp.Value) && (Math.Abs(diff) > 15))
+            if (Math.Abs(diff) > 15)
                 observaciones_txt.Enabled = true;
             else
                 observaciones_txt.Enabled = false;
@@ -276,7 +282,7 @@ namespace InAndOut
         {
             //DateTime dt = DateTime.ParseExact(currentTime.Text, ConfigurationManager.AppSettings["DateTimeFormat"], CultureInfo.CurrentCulture);
             var diff = (fechaActual - hora_egreso_dtp.Value).TotalDays * 24 * 60;
-            if ((fechaActual < hora_egreso_dtp.Value) && (Math.Abs(diff) > 15))
+            if (Math.Abs(diff) > 15)
                 observaciones_txt.Enabled = true;
             else
                 observaciones_txt.Enabled = false;
@@ -288,13 +294,14 @@ namespace InAndOut
             if (io.UpdateDBase(ConfigurationManager.AppSettings["BackupPath"]))
             {
                 MessageBox.Show("Base de datos actualizada correctamente");
+                labelFichadasLocales.Visible = false;
                 GetStatus();
             }
             else
             {
                 MessageBox.Show("Error al actualizar la base de datos. Comuniquese con JP.");
             }
-                
+
         }
     }
 }

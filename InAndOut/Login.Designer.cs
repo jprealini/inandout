@@ -101,7 +101,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 121);
+            this.ClientSize = new System.Drawing.Size(284, 120);
+            this.ControlBox = false;
             this.Controls.Add(this.ok_Button);
             this.Controls.Add(this.cancel_Button);
             this.Controls.Add(this.label2);
@@ -116,6 +117,7 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "In & Out - Login";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InAndOut
+﻿namespace InAndOut
 {
     static class Global
     {
         private static string _appUser = "";
 
         private static int _appUserId;
+
+        private static bool _appUserIsAdmin;
 
         public static string appUser
         {
@@ -22,6 +18,12 @@ namespace InAndOut
         {
             get { return _appUserId; }
             set { _appUserId = value; }
+        }
+
+        public static bool appUserIsAdmin
+        {
+            get { return _appUserIsAdmin; }
+            set { _appUserIsAdmin = value; }
         }
     }
 }

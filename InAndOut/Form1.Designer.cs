@@ -38,6 +38,7 @@
             this.registrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.herramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarReporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.subirRegistroLocalMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.actual_user = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.observaciones_txt = new System.Windows.Forms.TextBox();
@@ -45,7 +46,7 @@
             this.hora_egreso_dtp = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.subirRegistroLocalMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelFichadasLocales = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +67,7 @@
             this.in_button.BackColor = System.Drawing.Color.Transparent;
             this.in_button.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.in_button.ForeColor = System.Drawing.Color.Green;
-            this.in_button.Location = new System.Drawing.Point(15, 211);
+            this.in_button.Location = new System.Drawing.Point(15, 235);
             this.in_button.Name = "in_button";
             this.in_button.Size = new System.Drawing.Size(140, 36);
             this.in_button.TabIndex = 1;
@@ -78,7 +79,7 @@
             // 
             this.out_button.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.out_button.ForeColor = System.Drawing.Color.Red;
-            this.out_button.Location = new System.Drawing.Point(158, 211);
+            this.out_button.Location = new System.Drawing.Point(158, 235);
             this.out_button.Name = "out_button";
             this.out_button.Size = new System.Drawing.Size(140, 36);
             this.out_button.TabIndex = 2;
@@ -89,7 +90,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(15, 253);
+            this.button3.Location = new System.Drawing.Point(15, 277);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(283, 47);
             this.button3.TabIndex = 3;
@@ -134,10 +135,18 @@
             // 
             // generarReporteToolStripMenuItem
             // 
+            this.generarReporteToolStripMenuItem.Enabled = false;
             this.generarReporteToolStripMenuItem.Name = "generarReporteToolStripMenuItem";
             this.generarReporteToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.generarReporteToolStripMenuItem.Text = "Generar Reporte...";
             this.generarReporteToolStripMenuItem.Click += new System.EventHandler(this.generarReporteToolStripMenuItem_Click);
+            // 
+            // subirRegistroLocalMenu
+            // 
+            this.subirRegistroLocalMenu.Name = "subirRegistroLocalMenu";
+            this.subirRegistroLocalMenu.Size = new System.Drawing.Size(187, 22);
+            this.subirRegistroLocalMenu.Text = "Subir Registro Local...";
+            this.subirRegistroLocalMenu.Click += new System.EventHandler(this.subirRegistroLocalMenu_Click);
             // 
             // actual_user
             // 
@@ -152,18 +161,18 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 37);
+            this.label1.Location = new System.Drawing.Point(12, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 17);
+            this.label1.Size = new System.Drawing.Size(61, 17);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Usuario Actual :";
+            this.label1.Text = "Usuario :";
             // 
             // observaciones_txt
             // 
             this.observaciones_txt.Location = new System.Drawing.Point(15, 133);
             this.observaciones_txt.Multiline = true;
             this.observaciones_txt.Name = "observaciones_txt";
-            this.observaciones_txt.Size = new System.Drawing.Size(283, 72);
+            this.observaciones_txt.Size = new System.Drawing.Size(283, 76);
             this.observaciones_txt.TabIndex = 8;
             this.observaciones_txt.Text = "Observaciones...";
             // 
@@ -201,18 +210,24 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "Horario de hoy:";
             // 
-            // subirRegistroLocalMenu
+            // labelFichadasLocales
             // 
-            this.subirRegistroLocalMenu.Name = "subirRegistroLocalMenu";
-            this.subirRegistroLocalMenu.Size = new System.Drawing.Size(187, 22);
-            this.subirRegistroLocalMenu.Text = "Subir Registro Local...";
-            this.subirRegistroLocalMenu.Click += new System.EventHandler(this.subirRegistroLocalMenu_Click);
+            this.labelFichadasLocales.AutoSize = true;
+            this.labelFichadasLocales.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFichadasLocales.ForeColor = System.Drawing.Color.Red;
+            this.labelFichadasLocales.Location = new System.Drawing.Point(13, 212);
+            this.labelFichadasLocales.Name = "labelFichadasLocales";
+            this.labelFichadasLocales.Size = new System.Drawing.Size(294, 13);
+            this.labelFichadasLocales.TabIndex = 13;
+            this.labelFichadasLocales.Text = "Hay fichadas sin registrar. Intente Subir Registro Local...";
+            this.labelFichadasLocales.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 312);
+            this.ClientSize = new System.Drawing.Size(314, 336);
+            this.Controls.Add(this.labelFichadasLocales);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.hora_egreso_dtp);
@@ -228,8 +243,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(330, 350);
-            this.MinimumSize = new System.Drawing.Size(330, 350);
+            this.MaximumSize = new System.Drawing.Size(330, 375);
+            this.MinimumSize = new System.Drawing.Size(330, 375);
             this.Name = "Form1";
             this.Text = "In and Out";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -259,6 +274,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem subirRegistroLocalMenu;
+        private System.Windows.Forms.Label labelFichadasLocales;
     }
 }
 
