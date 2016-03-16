@@ -143,8 +143,7 @@ namespace InAndOut
             {
                 t.TableName = t.Select().First().Field<string>(1);
                 tables.Tables.Add(t);
-            }
-                
+            }                
 
             eu.ExportDataSetToExcel(tables, Application.StartupPath, Filename);
 
