@@ -7,6 +7,7 @@ using System.Linq;
 using MySql.Data.MySqlClient;
 using System.Threading;
 using System.Windows.Forms;
+using System.IO;
 
 namespace InAndOut
 {
@@ -80,7 +81,7 @@ namespace InAndOut
 
         public bool GetUser(string sqlCommand, string user, byte[] password)
         {
-
+            bool status = false;
             MySqlCommand command = new MySqlCommand();
             command.Connection = conn;
 
@@ -90,25 +91,34 @@ namespace InAndOut
             // Open a connection to database.
             command.Parameters.AddWithValue("@userName", user);
             command.Parameters.AddWithValue("@password", password);
-            conn.Open();
-
-            // Read data returned for the query.
-            MySqlDataReader reader = command.ExecuteReader();
-
-            if (reader.HasRows)
+            try
             {
-                while (reader.Read())
+                conn.Open();
+
+                // Read data returned for the query.
+                MySqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
                 {
-                    Global.appUser = (string)reader["userName"];
-                    Global.appUserId = (int)reader["id"];
-                    Global.appUserIsAdmin = (bool)reader["isAdmin"];
+                    while (reader.Read())
+                    {
+                        Global.appUser = (string)reader["userName"];
+                        Global.appUserId = (int)reader["id"];
+                        Global.appUserIsAdmin = (bool)reader["isAdmin"];
+                    }
+                    reader.Close();
+                    conn.Close();
+                    status = true;
+                    return status;
                 }
-                reader.Close();
-                conn.Close();
-                return true;
+                conn.Close();                
+                return status;
             }
-            conn.Close();
-            return false;
+            catch (Exception ex)
+            {
+                throw new Exception("No se ha podido lograr una conexion al servidor de base de datos.\n\rVerifique su conexion a internet y vuelva a intentar.\n\rOriginal Error: '" + ex.Message + "'");
+            }
+
         }
 
         public void GetRecords(string storedProcedure, string Filename, string date1, string date2, int userId = 0)
@@ -155,18 +165,14 @@ namespace InAndOut
         public void SaveOfflineAction(string sqlCommand)
         {
             MySqlCommand command = new MySqlCommand();
-            command.Connection = conn;
+            command.Connection = conn;           
             command.CommandType = CommandType.Text;
-            command.CommandText = sqlCommand;
-
+            command.CommandText = sqlCommand;            
             try
             {
-                conn.Open();
-                //conn.Open();
-                // ... other parameters
+                conn.Open();               
                 command.ExecuteNonQuery();
-
-                conn.Close();
+                conn.Close();                
             }
             catch (Exception ex)
             {
@@ -178,10 +184,47 @@ namespace InAndOut
             }
         }
 
+        public void SaveOfflineAction(StreamReader file)
+        {
+            string line;
+            MySqlCommand command = new MySqlCommand();
+            MySqlTransaction trans;
+            conn.Open();
+            trans = conn.BeginTransaction();
+            command.Connection = conn;
+            command.CommandType = CommandType.Text;            
+            command.Transaction = trans;
+
+            while ((line = file.ReadLine()) != null)
+            {   
+                command.CommandText = line;                
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (MySqlException ex)
+                {
+                    trans.Rollback();
+                    conn.Close();
+                    throw new Exception(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    conn.Close();
+                    throw new Exception("Error en conexion.Intente mas tarde.\n\r" + ex.Message);
+                }
+                
+            }
+
+            trans.Commit();
+            conn.Close();
+        }
+
         public void SaveAction(string sqlCommand, int userId, Enums.Actions action, string currentTime, string observaciones, string station)
         {
             MySqlCommand command = new MySqlCommand();
-            command.Connection = conn;
+            command.Connection = conn;           
             command.CommandType = CommandType.Text;
             command.CommandText = sqlCommand;            
 
@@ -194,8 +237,9 @@ namespace InAndOut
             command.Parameters.AddWithValue("@hora", dt.ToString("HH:mm"));
             command.Parameters.AddWithValue("@actionId", action);
             command.Parameters.AddWithValue("@station", station);
-            command.Parameters.AddWithValue("@observaciones", observaciones);
-            
+            command.Parameters.AddWithValue("@observaciones", observaciones == "Observaciones..." ? null : observaciones);
+            Log.Info("Id de Usuario para insert = " + userId.ToString());
+
             try
             {
                 conn.Open();
@@ -208,7 +252,7 @@ namespace InAndOut
             catch(Exception ex)
             {
                 //Creates the INSERT command to save in a file in case the connection drops
-                var queryTest = CommandAsSql(command);
+                var queryTest = CommandAsSql(command);                
                 IO io = new IO();
                 io.WriteToFile(ConfigurationManager.AppSettings["BackupPath"], queryTest);
                 throw new Exception("Error en conexion. Se ha registrado la actividad en forma local.\n\r" + ex.Message);

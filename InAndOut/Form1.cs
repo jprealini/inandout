@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
-
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 
@@ -21,8 +21,8 @@ namespace InAndOut
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            Login form = new Login();
+        {           
+            Login form = new Login();            
             form.ShowDialog();
             //Inicia el timer que va a servir para fichar
             StartTimer();
@@ -95,7 +95,7 @@ namespace InAndOut
 
         private void in_button_click(object sender, EventArgs e)
         {
-            
+            Log.Info("Ingreso para " + actual_user.Text + " generado");
             DialogResult dialogResult1 = MessageBox.Show("Confirma que su horario de ingreso hoy es a las " + hora_ingreso_dtp.Value.ToShortTimeString() + " horas?", "Confirmacion de Horario", MessageBoxButtons.YesNo);
             if (dialogResult1 == DialogResult.Yes)
             {
@@ -103,7 +103,7 @@ namespace InAndOut
                 var diff = (fechaActual - hora_ingreso_dtp.Value).TotalDays * 24 * 60;
                 if (Math.Abs(diff) > 15)
                 {
-                    if (observaciones_txt.Text == "Observaciones...")
+                    if (observaciones_txt.Text.Trim() == "Observaciones..." || observaciones_txt.Text.Trim() == "" || observaciones_txt.Text.Trim().Length < 10)
                         MessageBox.Show("Especifique en el campo Observaciones el motivo de su ingreso a esta hora");
                     else
                     {
@@ -146,6 +146,7 @@ namespace InAndOut
 
         private void out_button_click(object sender, EventArgs e)
         {
+            Log.Info("Egreso para " + actual_user.Text + " generado");
             DialogResult dialogResult1 = MessageBox.Show("Confirma que su horario de salida hoy es a las " + hora_egreso_dtp.Value.ToShortTimeString() + " horas?", "Confirmacion de Horario", MessageBoxButtons.YesNo);
             if (dialogResult1 == DialogResult.Yes)
             {
@@ -153,7 +154,7 @@ namespace InAndOut
                 var diff = (fechaActual - hora_egreso_dtp.Value).TotalDays * 24 * 60;
                 if (Math.Abs(diff) > 15)
                 {
-                    if (observaciones_txt.Text == "Observaciones...")
+                    if (observaciones_txt.Text.Trim() == "Observaciones..." || observaciones_txt.Text.Trim() == "" || observaciones_txt.Text.Trim().Length < 10) 
                         MessageBox.Show("Especifique en el campo Observaciones el motivo de su egreso a esta hora");
                     else
                     {
@@ -293,6 +294,7 @@ namespace InAndOut
             IO io = new IO();
             if (io.UpdateDBase(ConfigurationManager.AppSettings["BackupPath"]))
             {
+                Log.Info("UpdateDBase Passed Ok");
                 MessageBox.Show("Base de datos actualizada correctamente");
                 labelFichadasLocales.Visible = false;
                 GetStatus();

@@ -160,20 +160,19 @@ namespace InAndOut
                         inColumn = n + 1;
                         inRow = inHeaderLength + 2 + m;
                         excelWorkSheet.Cells[inRow, inColumn] = dtbl.Rows[m].ItemArray[n].ToString();
-                        minutos = ((int)dtbl.Rows[m].ItemArray[5] * 60) + (int)dtbl.Rows[m].ItemArray[6];
+                        minutos = (int.Parse(dtbl.Rows[m].ItemArray[6].ToString()) * 60) + int.Parse(dtbl.Rows[m].ItemArray[7].ToString());
                         if (m % 2 == 0)
-                            excelWorkSheet.get_Range("A" + inRow.ToString(), "H" + inRow.ToString()).Interior.Color = System.Drawing.ColorTranslator.FromHtml("#CCC");
-                        
+                            excelWorkSheet.get_Range("A" + inRow.ToString(), "K" + inRow.ToString()).Interior.Color = System.Drawing.ColorTranslator.FromHtml("#CCC");                        
                         if(minutos < 465)
-                            excelWorkSheet.get_Range("A" + inRow.ToString(), "H" + inRow.ToString()).Interior.Color = System.Drawing.ColorTranslator.FromHtml("#E11");
+                            excelWorkSheet.get_Range("A" + inRow.ToString(), "K" + inRow.ToString()).Interior.Color = System.Drawing.ColorTranslator.FromHtml("#E11");
                         else if (minutos > 495)
-                            excelWorkSheet.get_Range("A" + inRow.ToString(), "H" + inRow.ToString()).Interior.Color = System.Drawing.ColorTranslator.FromHtml("#1E1");
+                            excelWorkSheet.get_Range("A" + inRow.ToString(), "K" + inRow.ToString()).Interior.Color = System.Drawing.ColorTranslator.FromHtml("#1E1");
 
                     }
                 }
 
                 //Excel Header
-                Microsoft.Office.Interop.Excel.Range cellRang = excelWorkSheet.get_Range("A1", "H3");
+                Microsoft.Office.Interop.Excel.Range cellRang = excelWorkSheet.get_Range("A1", "K3");
                 cellRang.Merge(false);
                 cellRang.Interior.Color = System.Drawing.Color.White;
                 cellRang.Font.Color = System.Drawing.Color.Gray;
@@ -183,7 +182,7 @@ namespace InAndOut
                 excelWorkSheet.Cells[1, 1] = "Reporte Mensual";
 
                 //Style table column names
-                cellRang = excelWorkSheet.get_Range("A4", "H4");
+                cellRang = excelWorkSheet.get_Range("A4", "K4");
                 cellRang.Font.Bold = true;
                 cellRang.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.White);
                 cellRang.Interior.Color = System.Drawing.ColorTranslator.FromHtml("#ED7D31");

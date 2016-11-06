@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InAndOut.exe" size="392656">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InAndOut.exe" size="395728">
       <assemblyIdentity name="InAndOut" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>6i6KB1ei3yluBh55WdtTtTGbJ1o=</dsig:DigestValue>
+        <dsig:DigestValue>iwzysYVdfSWf1qzOHh/+fD3Wp7g=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -98,13 +98,13 @@
       <dsig:DigestValue>n5dtSgWMGriJFVoPg0htaJBiNcE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="InAndOut.exe.config" size="3173">
+  <file name="InAndOut.exe.config" size="3958">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>HyPo71U+aygie9WDIul4d63JweA=</dsig:DigestValue>
+      <dsig:DigestValue>CaTZR3VusllFnaD66cvXpcRDOPE=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -8,14 +8,7 @@ namespace InAndOut
     {
         public Login()
         {
-            InitializeComponent();
-            ActiveControl = user_txtBox;
-            pass_txtBox.PasswordChar = '*';
-            user_txtBox.CharacterCasing = CharacterCasing.Lower;
-            // Align the text in the center of the TextBox control.
-            pass_txtBox.TextAlign = HorizontalAlignment.Center;
-            user_txtBox.TextAlign = HorizontalAlignment.Center;
-            
+            InitializeComponent();            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,14 +28,24 @@ namespace InAndOut
             var hasher = System.Security.Cryptography.SHA256.Create();
             byte[] hashedBytes = hasher.ComputeHash(passwordBytes);
 
-            var result = dAccess.GetUser("select * from Users where UserName = @userName and Password = @password", user_txtBox.Text, hashedBytes);
-            if (!result)
+            try
             {
-                ClearTextBoxes();
-                MessageBox.Show("Usuario o contraseña incorrectos... vuelva a intentar");
+                var result = dAccess.GetUser("select * from Users where UserName = @userName and Password = @password", user_txtBox.Text, hashedBytes);
+                if (!result)
+                {
+                    ClearTextBoxes();
+                    MessageBox.Show("Usuario o contraseña incorrectos... vuelva a intentar");
+                }
+                else
+                {
+                    Log.Info("Usuario " + user_txtBox.Text + " logueado correctamente");
+                    this.Close();
+                }
             }
-            else            
-                this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error " + ex.Message);
+            }                
         }
 
         private void ClearTextBoxes()
@@ -53,7 +56,13 @@ namespace InAndOut
 
         private void Login_Load(object sender, EventArgs e)
         {
-
+            Log.Info("Login_Load");
+            ActiveControl = user_txtBox;
+            pass_txtBox.PasswordChar = '*';
+            user_txtBox.CharacterCasing = CharacterCasing.Lower;
+            // Align the text in the center of the TextBox control.
+            pass_txtBox.TextAlign = HorizontalAlignment.Center;
+            user_txtBox.TextAlign = HorizontalAlignment.Center;
         }
     }
 }

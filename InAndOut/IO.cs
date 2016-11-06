@@ -88,6 +88,7 @@ namespace InAndOut
                 }
 
                 fs.Close();
+                fs.Dispose();
             }
         }
 
@@ -105,8 +106,8 @@ namespace InAndOut
             // Write the string to a file.
             System.IO.StreamWriter file = new System.IO.StreamWriter(Filename, true);
             file.WriteLine(lines);
-
             file.Close();
+            file.Dispose();
         }
 
         public DataTable GetDataTabletFromCSVFile(string csv_file_path)
@@ -150,27 +151,32 @@ namespace InAndOut
         public bool UpdateDBase(string path)
         {
             bool status = false;
-            string line;
-
+            
             if (File.Exists(path))
-            {
+            {                
                 try
                 {
                     MySqlDataAccess da = new MySqlDataAccess();
-                    System.IO.StreamReader file = new System.IO.StreamReader(path);
+                    System.IO.StreamReader file = new System.IO.StreamReader(path);                    
 
-                    while ((line = file.ReadLine()) != null)
-                    {
-                        da.SaveOfflineAction(line);
-                    }
+                    //while ((line = file.ReadLine()) != null)
+                    //{
+                    //    Log.Info("entered while");
+                    //    da.SaveOfflineAction(line);
+                    //    Log.Info("Offline action saved");
+                    //}
+                    //Log.Info("Offline activity saved");
+
+                    da.SaveOfflineAction(file);
 
                     status = true;
-                    file.Close();
-                    File.Delete(path);
+                    file.Close(); 
+                    file.Dispose();                                        
+                    File.Delete(path);                    
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    Log.Error(ex.Message);                    
                 }                
             }
 
